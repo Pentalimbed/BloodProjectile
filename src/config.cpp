@@ -25,7 +25,13 @@ void Config::from_toml(const toml::table& tbl, Config& config)
 
     config.proj_keyword_map.clear();
     for (auto& [k, v] : *tbl["projectile_keywords"].as_table())
-        config.proj_keyword_map.emplace(k.str(), v.value_or(""));
+    {
+        auto proj = RE::TESForm::LookupByEditorID<RE::BGSProjectile>(v.value_or(""));
+        if (proj)
+            config.proj_keyword_map.emplace(k.str(), proj);
+        else
+            logger::warn("Cannot find projectile {}", v.value_or(""));
+    }
 }
 
 void Config::loadFile()

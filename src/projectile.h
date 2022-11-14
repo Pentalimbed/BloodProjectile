@@ -4,9 +4,9 @@ namespace blood
 {
 inline RE::BGSProjectile* getProjectileType(RE::Actor* actor)
 {
-    for (auto& [edid, keyword] : Config::getSingleton()->proj_keyword_map)
+    for (auto& [keyword, proj] : Config::getSingleton()->proj_keyword_map)
         if (actor->HasKeywordString(keyword))
-            return RE::TESForm::LookupByEditorID<RE::BGSProjectile>(edid);
+            return proj;
     return nullptr;
 }
 

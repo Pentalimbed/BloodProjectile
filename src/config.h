@@ -29,8 +29,7 @@ struct Config
     HitBurstConfig hit_burst   = {};
     bool           decap_spurt = true;
 
-    StrMap<std::string> proj_keyword_map = {{"XBloodProjectile", "ActorTypeNPC"}};
-
+    StrMap<RE::BGSProjectile*> proj_keyword_map = {};
 
     static Config* getSingleton()
     {
